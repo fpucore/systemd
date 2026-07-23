@@ -86,7 +86,7 @@ To install:
 
 ## Credits
 
-This project is based on the upstream systemd project.
+This project is based on the upstream [systemd](https://www.github.com/systemd/systemd) project.
 
 Upstream systemd provides the foundation for this work and is a near drop-in replacement.
 
