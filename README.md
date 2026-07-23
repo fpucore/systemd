@@ -68,16 +68,18 @@ Version information is available through:
 
 This package is built specifically for:
 
-- GNU Operating System / H-Linux
+- GNU Operating System / H-Linux (and other distributions with minimal changes needed)
 - x86_64 architecture
 - H-Linux ecosystem
 
 To install:
 
 ```bash
-gh repo clone fpucore/systemd
-goto systemd
-./INSTALL.sh
+> gh repo clone fpucore/systemd
+
+> goto systemd
+
+> ./INSTALL.sh
 ```
 
 ---
@@ -90,7 +92,7 @@ Upstream systemd provides the foundation for this work and is a near drop-in rep
 
 Any patches, repackaging and other modifications focus on downstream integration, packaging, UX improvements, and distribution-specific requirements.
 
-## License
+## License(s)
 
 The systemd components remain licensed under their respective upstream licenses.
 
