@@ -1,42 +1,96 @@
+# systemd
+
 ![Systemd](http://brand.systemd.io/assets/page-logo.png)
 
-System and Service Manager
+## System and Service Manager
 
-[![OBS Packages Status](https://build.opensuse.org/projects/system:systemd/packages/systemd/badge.svg?type=default)](https://build.opensuse.org/project/show/system:systemd)<br/>
-[![Semaphore CI 2.0 Build Status](https://the-real-systemd.semaphoreci.com/badges/systemd/branches/main.svg?style=shields)](https://the-real-systemd.semaphoreci.com/projects/systemd)<br/>
-[![Coverity Scan Status](https://scan.coverity.com/projects/350/badge.svg)](https://scan.coverity.com/projects/systemd)<br/>
-[![OSS-Fuzz Status](https://oss-fuzz-build-logs.storage.googleapis.com/badges/systemd.svg)](https://oss-fuzz-build-logs.storage.googleapis.com/index.html#systemd)<br/>
-[![CIFuzz](https://github.com/systemd/systemd/actions/workflows/cifuzz.yml/badge.svg)](https://github.com/systemd/systemd/actions/workflows/cifuzz.yml)</br>
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1369/badge)](https://bestpractices.coreinfrastructure.org/projects/1369)<br/>
-[![Fossies codespell report](https://fossies.org/linux/test/systemd-main.tar.gz/codespell.svg)](https://fossies.org/linux/test/systemd-main.tar.gz/codespell.html)</br>
-[![Translation status](https://translate.fedoraproject.org/widget/systemd/svg-badge.svg)](https://translate.fedoraproject.org/engage/systemd/)</br>
-[![Coverage Status](https://coveralls.io/repos/github/systemd/systemd/badge.svg?branch=main)](https://coveralls.io/github/systemd/systemd?branch=main)</br>
-[![Packaging status](https://repology.org/badge/tiny-repos/systemd.svg)](https://repology.org/project/systemd/versions)</br>
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/systemd/systemd/badge)](https://securityscorecards.dev/viewer/?platform=github.com&org=systemd&repo=systemd)
+Patched and repackaged `systemd` for GNU Operating System / H-Linux.
 
-## Details
+This build is based on upstream systemd, with a brand new `sysd Service Manager Interface`, patches applied, packaging improvements, and H-Linux-specific integration.
 
-Most documentation is available on [systemd's web site](https://systemd.io/).
+---
 
-Assorted, older, general information about systemd can be found in the [systemd Wiki](https://www.freedesktop.org/wiki/Software/systemd).
+## Removal of birth.Date Registration Fields
 
-Information about build requirements is provided in the [README file](README).
+This package permanently removes the `birthDate` registration fields from the systemd introduced for age-verification related workflows.
 
-Consult our [NEWS file](NEWS) for information about what's new in the most recent systemd versions.
+The removal is performed at the source code level.
 
-Please see the [Code Map](docs/ARCHITECTURE.md) for information about this repository's layout and content.
+The affected fields are not secretly disabled, hidden, or filtered at runtime — they have been **permanently removed** from this repackaged build.
 
-Please see the [Hacking guide](docs/HACKING.md) for information on how to hack on systemd and test your modifications.
+The issue has been a subject of heated discussion within the Linux and systemd communities, particularly around questions of operating system scope, privacy, metadata handling, and the role of user identity records.
 
-Please see our [Contribution Guidelines](docs/CONTRIBUTING.md) for more information about filing GitHub Issues and posting GitHub Pull Requests.
+The goal of this patched and repackaged build of systemd is to provide a cleaner system identity model aligned with the H-Linux design philosophy, and protection of user privacy.
 
-When preparing patches for systemd, please follow our [Coding Style Guidelines](docs/CODING_STYLE.md).
+---
 
-If you are looking for support, please contact our [mailing list](https://lists.freedesktop.org/mailman/listinfo/systemd-devel), join our [IRC channel #systemd on libera.chat](https://web.libera.chat/#systemd) or [Matrix channel](https://matrix.to/#/#systemd-project:matrix.org)
+## sysd - Service Manager Interface
 
-Stable branches with backported patches are available in the [stable repo](https://github.com/systemd/systemd-stable).
+This build introduces **sysd**, a lightweight native service management interface.
 
-We have a security bug bounty program sponsored by the [Sovereign Tech Fund](https://www.sovereigntechfund.de/) hosted on [YesWeHack](https://yeswehack.com/programs/systemd-bug-bounty-program)
+Instead of requiring traditional systemctl syntax:
 
-Repositories with distribution packages built from git main are [available on OBS](https://software.opensuse.org//download.html?project=system%3Asystemd&package=systemd),
-and also repositories with [packages built from the latest stable release](https://software.opensuse.org//download.html?project=system%3Asystemd%3Astable&package=systemd)
+```bash
+> sudo systemctl status squid.service
+```
+
+users can now interact with services through a more simplified prompt interface:
+
+```bash
+> sysd status squid
+```
+
+Examples:
+
+```bash
+  sysd start [service]
+  sysd stop [service]
+  sysd restart [service]
+  sysd enable [service]
+  sysd disable [service]
+  sysd status [service]
+  sysd logs [service]
+  sysd failed [service]
+```
+
+Version information is available through:
+
+```bash
+> sysd version (or --version)
+```
+
+`sysd` is compiled as part of the systemd package build process and installed alongside the system manager, ensuring that the interface is always available when systemd is installed.
+
+---
+
+## Build & Install
+
+This package is built specifically for:
+
+- GNU Operating System / H-Linux
+- x86_64 architecture
+- H-Linux ecosystem
+
+To install:
+
+```bash
+gh repo clone fpucore/systemd
+goto systemd
+./INSTALL.sh
+```
+
+---
+
+## Credits
+
+This project is based on the upstream systemd project.
+
+Upstream systemd provides the foundation for this work and is a near drop-in replacement.
+
+Any patches, repackaging and other modifications focus on downstream integration, packaging, UX improvements, and distribution-specific requirements.
+
+## License
+
+The systemd components remain licensed under their respective upstream licenses.
+
+Additional components, including `sysd`, are released under the MIT License.
