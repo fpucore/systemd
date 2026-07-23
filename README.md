@@ -1,3 +1,4 @@
+# GNU Operating System / H-Linux
 # systemd
 
 ![Systemd](http://brand.systemd.io/assets/page-logo.png)
@@ -10,7 +11,7 @@ This build is based on upstream systemd, with a brand new `sysd Service Manager 
 
 ---
 
-## Removal of birth.Date Registration Fields
+## Complete Removal of birthDate Registration Fields
 
 This package permanently removes the `birthDate` registration fields from the systemd introduced for age-verification related workflows.
 
